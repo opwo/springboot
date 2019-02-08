@@ -9,13 +9,13 @@ import com.example.demo.component.LoginHandleInterceptor;
 
 @Configuration
 public class MyMvcConfig implements WebMvcConfigurer{
-
+	
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		// TODO Auto-generated method stub
 //		registry.addRedirectViewController("main.html", "dashboard");
 		registry.addViewController("/").setViewName("login");
-		registry.addViewController("main.html").setViewName("dashboard");
+		registry.addViewController("main.html").setViewName("home");
 	}
 
 	@Override
