@@ -14,7 +14,7 @@ public class MyMvcConfig implements WebMvcConfigurer{
 	public void addViewControllers(ViewControllerRegistry registry) {
 		// TODO Auto-generated method stub
 //		registry.addRedirectViewController("main.html", "dashboard");
-		registry.addViewController("/").setViewName("index");
+		registry.addViewController("/").setViewName("login");
 		registry.addViewController("main.html").setViewName("dashboard");
 	}
 
@@ -22,7 +22,7 @@ public class MyMvcConfig implements WebMvcConfigurer{
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new LoginHandleInterceptor())
 		.addPathPatterns("/**")
-		.excludePathPatterns("/","/user/login");
+		.excludePathPatterns("/","/user/login","/assets/**");
 	}
 
 }
