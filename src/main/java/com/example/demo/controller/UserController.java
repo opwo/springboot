@@ -16,7 +16,6 @@ public class UserController {
 	//@ResponseBody
 	public String login(@RequestParam("username") String username, String pwd,
 			HttpSession session) {
-		
 //		return "dashboard";
 		session.setAttribute("loginUser", username);
 		return "redirect:/main.html";//重定向，防止表单重交
