@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="assets/img/favicon.ico">
+
+    <title>Dashboard Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap.min.css" th:href="@{assets/css/bootstrap.min.css}" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="assets/css/dashboard.css" rel="stylesheet">
+
+    <script src="assets/js/ie-emulation-modes-warning.js"></script>
+
+  </head>
+
+  <body>
+	<!-- 引入顶部导航栏 -->
+	<div th:replace="~{commons/bar::topbar}"></div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <!-- 引入侧边导航栏 -->
+		<div th:replace="~{commons/bar::sidebar(activeUri='users')}"></div>
+         
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">用户列表</h1>
+
+
+          <h2 class="sub-header"><a class="btn btn-sm btn-success" href="/user" th:href="@{/user}">添加用户</a></h2>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>用户名</th>
+                  <th>密码</th>
+                  <th>单位TID</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                <tr th:each="user:${users}">
+                  <td th:text="${user.id}"></td>
+                  <td th:text="${user.username}"></td>
+                  <td>[[${user.password}]]</td>
+                  <td>[[${user.danWeiTID}]]</td>
+                  <td>
+					<a class="btn btn-sm btn-primary" th:href="@{/user/}+${user.id}">编辑</a>
+					<button th:attr="del_uri=@{/user/}+${user.id}" type="submit" class="btn btn-sm btn-danger deleteBtn">删除</button>
+				  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+ 
+ <form id="deleteUserForm" method="post">
+		<input type="hidden" name="_method" value="delete">
+</form>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script>window.jQuery || document.write('<script src="assets/js/jquery.min.js"><\/script>')</script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/vendor/holder.min.js"></script>
+    <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script type="text/javascript">
+		$(".deleteBtn").click(function(){
+			$("#deleteUserForm").attr("action",$(this).attr("del_uri")).submit();
+			return false;
+		});
+	</script>
+  </body>
+</html>

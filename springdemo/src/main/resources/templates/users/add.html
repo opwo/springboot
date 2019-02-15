@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="assets/img/favicon.ico">
+
+<title>Dashboard Template for Bootstrap</title>
+
+<!-- Bootstrap core CSS -->
+<link href="assets/css/bootstrap.min.css"
+	th:href="@{assets/css/bootstrap.min.css}" rel="stylesheet">
+
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<link href="assets/css/ie10-viewport-bug-workaround.css" th:href="@{assets/css/ie10-viewport-bug-workaround.css}"
+	rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link href="assets/css/dashboard.css" rel="stylesheet" th:href="@{assets/css/dashboard.css}">
+
+<script src="assets/js/ie-emulation-modes-warning.js" th:src="@{assets/js/ie-emulation-modes-warning.js}"></script>
+
+</head>
+
+<body>
+	<!-- 引入顶部导航栏 -->
+	<div th:replace="~{commons/bar::topbar}"></div>
+
+	<div class="container-fluid">
+		<div class="row">
+			<!-- 引入侧边导航栏 -->
+			<div th:replace="~{commons/bar::sidebar(activeUri='users')}"></div>
+
+		</div>
+		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+			<form th:action="@{/user}" method="post">
+				<!-- 支持PUT等请求需要 -->
+				<input type="hidden" name="_method" value="put" th:if="${user!=null}">
+				<div class="form-group">
+					<label>ID</label> 
+					<input type="text" name="id" class="form-control" placeholder="id" th:value="${user!=null}?${user.id}">
+				</div>
+				<div class="form-group">
+					<label>用户名</label> 
+					<input type="text" name="username" class="form-control" placeholder="用户名" th:value="${user!=null}?${user.username}">
+				</div>
+				<div class="form-group">
+					<label>密码</label> 
+					<input type="text" name="password" class="form-control" placeholder="密码" th:value="${user!=null}?${user.password}">
+				</div>
+				<div class="form-group">
+					<label>单位</label> 
+					<select name="danWeiTID" class="form-control">
+						<option th:value="${dept.treeID}" th:each="dept:${depts}" th:text="${dept.mingCheng}">1</option>
+					</select>
+				</div>
+				<!--  
+				<div class="form-group">
+					<label for="exampleFormControlSelect2">Example multiple
+						select</label> <select multiple class="form-control"
+						id="exampleFormControlSelect2">
+						<option th:value="${dept.id}" th:each="dept:${depts}" th:text="${dept.mingCheng}">1</option>
+					</select>
+				</div>
+				
+				<div class="form-group">
+					<label for="exampleFormControlTextarea1">Example textarea</label>
+					<textarea class="form-control" id="exampleFormControlTextarea1"
+						rows="3"></textarea>
+				</div>
+				-->
+				<div class="form-group">
+					<button type="submit" class="btn btn-sm btn-success form-control" th:text="${user!=null}?'修改':'添加'">添加</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script>
+		window.jQuery
+				|| document
+						.write('<script src="assets/js/jquery.min.js" th:src="@{assets/js/jquery.min.js}"><\/script>')
+	</script>
+	<script src="assets/js/bootstrap.min.js" th:src="@{assets/js/bootstrap.min.js}"></script>
+	<script src="assets/js/vendor/holder.min.js" th:src="@{assets/js/vendor/holder.min.js}"></script>
+	<script src="assets/js/ie10-viewport-bug-workaround.js" th:src="@{assets/js/vendor/holder.min.js}"></script>
+	<script type="text/javascript">
+		$.(".deleteBtn").click(function(){
+			
+			return false;
+		});
+	</script>
+</body>
+</html>

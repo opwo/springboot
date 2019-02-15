@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<!-- 此方法/error/4xx.html 只有在模板引擎。可以动态获取数据。放在/static/error/4xx.html获取不了具体数值 -->
+<h1>错误码：[[${status}]]</h1>
+<h1>时间戳：[[${timestamp}]]</h1>
+<h1>错误提示：[[${error}]]</h1>
+<h1>异常对象：[[${exception}]]</h1>
+<h1>异常消息：[[${message}]]</h1>
+</body>
+</html>
